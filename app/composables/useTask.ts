@@ -12,6 +12,7 @@ export function useTask() {
 		return tasks;
 	});
 
+	// FShow tasks based on filters
 	const filteredTasks = computed(() => {
 		if (selectedStatus.value === 'all') return store.tasks;
 		return store.tasks.filter(t => t.status === selectedStatus.value);

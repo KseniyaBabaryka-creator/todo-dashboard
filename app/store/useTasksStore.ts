@@ -9,6 +9,10 @@ export const useTasksStore = defineStore('taskStore', {
 	actions: {
 		setTasks(tasks: Task[]) {
 			this.tasks = tasks;
+		},
+		updateTask(updated: Task) {
+			const index = this.tasks.findIndex(t => t.id === updated.id);
+			if (index !== -1) this.tasks[index] = updated;
 		}
 	},
 });
