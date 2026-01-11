@@ -24,16 +24,16 @@ A simple **ToDo Dashboard** built with **Nuxt 3**, **Pinia**, and **TailwindCSS*
 
 ## Project Structure
 
-/pages
-├─ index.vue # Landing page
-├─ tasks.vue # Task list page with filters
-└─ tasks/[id].vue # Task detail page with edit form
-/composables
-└─ useTask.ts # Task filtering and fetching logic
-/store
-└─ useTasksStore.ts # Pinia store for tasks
-/server
-└─ api/tasks # API routes for CRUD operations
+- /pages
+- ├─ index.vue # Landing page
+- ├─ tasks.vue # Task list page with filters
+- └─ tasks/[id].vue # Task detail page with edit form
+- /composables
+- └─ useTask.ts # Task filtering and fetching logic
+- /store
+- └─ useTasksStore.ts # Pinia store for tasks
+- /server
+- └─ api/tasks # API routes for CRUD operations
 
 
 ## API Endpoints
