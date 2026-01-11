@@ -50,45 +50,46 @@
 
 					<ul v-else class="flex flex-col gap-4 w-full">
 						<li v-for="task in filteredTasks" :key="task.id" class="w-full p-6 bg-[#F4F2FF] rounded-md flex flex-col items-start gap-1">
-							<p class="text-xl font-medium">{{ task.title }}</p>
-							<div class="flex items-center gap-2" :class="{'text-[#E42C5F]' : task.status === 'todo', 'text-[#ECB800]' : task.status === 'in-progress', 'text-[#2CE4A1]' : task.status === 'done'}">
-								<svg
-										v-if="task.status === 'todo'"
-										xmlns="http://www.w3.org/2000/svg"
-										fill="none"
-										viewBox="0 0 24 24"
-										stroke-width="1.5"
-										stroke="currentColor"
-										class="size-6">
-									<path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
-								</svg>
+							<NuxtLink :to="'/task/' + task.id" class="w-full h-full">
+								<p class="text-xl font-medium">{{ task.title }}</p>
+								<div class="flex items-center gap-2" :class="{'text-[#E42C5F]' : task.status === 'todo', 'text-[#ECB800]' : task.status === 'in-progress', 'text-[#2CE4A1]' : task.status === 'done'}">
+									<svg
+											v-if="task.status === 'todo'"
+											xmlns="http://www.w3.org/2000/svg"
+											fill="none"
+											viewBox="0 0 24 24"
+											stroke-width="1.5"
+											stroke="currentColor"
+											class="size-6">
+										<path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+									</svg>
 
-								<svg
-										v-else-if="task.status === 'done'"
-										xmlns="http://www.w3.org/2000/svg"
-										fill="none"
-										viewBox="0 0 24 24"
-										stroke-width="1.5"
-										stroke="currentColor"
-										class="size-6">
-									<path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-								</svg>
+									<svg
+											v-else-if="task.status === 'done'"
+											xmlns="http://www.w3.org/2000/svg"
+											fill="none"
+											viewBox="0 0 24 24"
+											stroke-width="1.5"
+											stroke="currentColor"
+											class="size-6">
+										<path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+									</svg>
 
-								<svg
-										v-else
-										xmlns="http://www.w3.org/2000/svg"
-										fill="none"
-										viewBox="0 0 24 24"
-										stroke-width="1.5"
-										stroke="currentColor"
-										class="size-6">
-									<path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-								</svg>
+									<svg
+											v-else
+											xmlns="http://www.w3.org/2000/svg"
+											fill="none"
+											viewBox="0 0 24 24"
+											stroke-width="1.5"
+											stroke="currentColor"
+											class="size-6">
+										<path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+									</svg>
 
 
-								<p>{{task.status}}</p>
-							</div>
-
+									<p>{{task.status}}</p>
+								</div>
+							</NuxtLink>
 						</li>
 					</ul>
 				</div>
@@ -144,8 +145,7 @@
 
 import {useTask} from "~/composables/useTask";
 
-const { tasks, filteredTasks, pending, selectedStatus } = useTask();
-
+const { filteredTasks, pending, selectedStatus } = useTask();
 </script>
 
 

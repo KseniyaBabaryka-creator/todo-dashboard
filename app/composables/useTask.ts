@@ -1,24 +1,21 @@
 import { ref, computed, watch } from 'vue';
 import type { Task } from '~~/server/utils/tasks-store';
+import { useTasksStore } from "~/store/useTasksStore";
 
 export function useTask() {
-	const { data, pending, error } = useAsyncData<Task[]>('tasks', () =>
-		$fetch('/api/tasks')
-	);
-
-	const tasks = ref<Task[]>(data || []);
-
-	watch(data, (val) => {
-		if (val?.value) tasks.value = val.value;
-	}, { immediate: true });
-
+	const store = useTasksStore();
 	const selectedStatus = ref<'all' | Task['status']>('all');
 
-	const filteredTasks = computed(() => {
-		if (!tasks.value) return [];
-		if (selectedStatus.value === 'all') return tasks.value;
-		return tasks.value.filter(t => t.status === selectedStatus.value);
+	const { data, pending, error } = useAsyncData('tasks', async () => {
+		const tasks = await $fetch<Task[]>('/api/tasks');
+		store.setTasks(tasks);
+		return tasks;
 	});
 
-	return { tasks, filteredTasks, pending, error, selectedStatus };
+	const filteredTasks = computed(() => {
+		if (selectedStatus.value === 'all') return store.tasks;
+		return store.tasks.filter(t => t.status === selectedStatus.value);
+	});
+
+	return { filteredTasks, selectedStatus, pending, error };
 }
